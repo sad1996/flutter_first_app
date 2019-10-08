@@ -12,7 +12,7 @@ class FavouritePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Favourites',
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
       body: Container(
@@ -29,6 +29,14 @@ class FavouritePage extends StatelessWidget {
             return Divider();
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Navigator.pop(context); // 1 Screen Back
+          Navigator.popUntil(
+              context, (route) => route.isFirst); // Comes to first screen
+        },
+        label: Text('Exit to Home'),
       ),
     );
   }

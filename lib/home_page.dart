@@ -22,12 +22,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Startup Name Generator',
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          'English Words',
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.list, color: Colors.black),
+            icon: Icon(Icons.list, color: Colors.white),
             onPressed: () {
               Navigator.push(
                   context,
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               title: Text(wordItem.asPascalCase),
               trailing: favouriteWords.contains(wordItem)
                   ? Icon(Icons.favorite, color: Colors.red)
-                  : Icon(Icons.favorite_border, color: Colors.black),
+                  : Icon(Icons.favorite_border),
               onTap: () {
                 setState(() {
                   if (favouriteWords.contains(wordItem))

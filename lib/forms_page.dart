@@ -27,13 +27,16 @@ class _FormsPageState extends State<FormsPage> {
           ),
           TextField(
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(gapPadding: 10),
                 hintText: 'Name',
                 labelText: 'Name',
                 prefixText: '\$ ',
                 suffixText: 'INR',
-                prefixIcon: Icon(Icons.keyboard),
-                suffixIcon: Icon(Icons.monetization_on)),
+                prefixIcon: Icon(Icons.monetization_on),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.keyboard_hide),
+                  onPressed: () {},
+                )),
           ),
           SizedBox(
             height: 20,
