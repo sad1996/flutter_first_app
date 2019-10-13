@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/forms_page.dart';
 import 'package:new_app/home_page.dart';
+import 'package:new_app/login_page.dart';
 import 'package:new_app/tabs_page.dart';
 
 class FlutterModule extends StatelessWidget {
@@ -49,6 +50,20 @@ class FlutterModule extends StatelessWidget {
             },
             title: Text('Example 3'),
             subtitle: Text('Tabs, Routes & Navigations'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+          Divider(height: 0.5),
+          ListTile(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute<bool>(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context) => LoginPage(),
+                ),
+              );
+            },
+            title: Text('Example 4'),
+            subtitle: Text('Cupertino View & Login'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
