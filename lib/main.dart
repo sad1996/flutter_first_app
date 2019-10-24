@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, primaryColor: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.indigo, primaryColor: Colors.indigo),
       routes: Map<String, WidgetBuilder>.from({
         'example1': (context) => HomePage(),
         'example2': (context) => FormsPage(),

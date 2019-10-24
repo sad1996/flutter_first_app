@@ -4,15 +4,20 @@ import 'package:new_app/home_page.dart';
 import 'package:new_app/login_page.dart';
 import 'package:new_app/tabs_page.dart';
 
+import 'trending_repos_page.dart';
+
 class FlutterModule extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: FlutterLogo(
-            colors: Colors.pink,
+            colors: Colors.yellow,
           ),
         ),
         title: Text('Flutter Examples'),
@@ -56,14 +61,27 @@ class FlutterModule extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context, rootNavigator: true).push(
-                MaterialPageRoute<bool>(
+                MaterialPageRoute(
                   fullscreenDialog: true,
                   builder: (BuildContext context) => LoginPage(),
                 ),
               );
             },
             title: Text('Example 4'),
-            subtitle: Text('Cupertino View & Login'),
+            subtitle: Text('Cupertino Dialog & Login'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+          Divider(height: 0.5),
+          ListTile(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => TrendingReposPage(),
+                ),
+              );
+            },
+            title: Text('Example 5'),
+            subtitle: Text('HTTP'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),

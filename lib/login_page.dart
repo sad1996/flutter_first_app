@@ -14,13 +14,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   GoogleSignInAccount account;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      key: _scaffoldKey,
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoButton(
           child: Text('Cancel'),
@@ -63,14 +61,14 @@ class _LoginPageState extends State<LoginPage> {
           setState(() {
             account = data;
           });
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
-            content: Text('Authentication Successfull'),
-          ));
+//          _scaffoldKey.currentState.showSnackBar(SnackBar(
+//            content: Text('Authentication Successfull'),
+//          ));
           print(data.email + ' : ' + data.photoUrl);
         } else {
-          _scaffoldKey.currentState.showSnackBar(SnackBar(
-            content: Text('Authentication Failed'),
-          ));
+//          _scaffoldKey.currentState.showSnackBar(SnackBar(
+//            content: Text('Authentication Failed'),
+//          ));
         }
       });
     } catch (error) {
@@ -84,9 +82,9 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           account = null;
         });
-        _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('Signed out successfully'),
-        ));
+//        _scaffoldKey.currentState.showSnackBar(SnackBar(
+//          content: Text('Signed out successfully'),
+//        ));
       });
     } catch (error) {
       print(error);
