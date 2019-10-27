@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:new_app/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: [
@@ -14,7 +19,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  GoogleSignInAccount account;
+  User user;
+
+  @override
+  void initState() {
+    super.initState();
+    getLoginStatus();
+  }
+
+  getLoginStatus() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.containsKey('user')) {
+      setState(() {
+        user = User.fromJson(json.decode(sharedPreferences.getString('user')));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +52,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if (account != null)
+            if (user != null)
               CircleAvatar(
-                backgroundImage: NetworkImage(account.photoUrl),
+                backgroundImage: NetworkImage(user.photoUrl),
                 radius: 70,
               )
             else
@@ -45,8 +65,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             Padding(padding: EdgeInsets.only(top: 18.0)),
             CupertinoButton.filled(
-              child: Text(account != null ? 'Sign out' : 'Sign in'),
-              onPressed: account != null ? _handleSignOut : _handleSignIn,
+              child: Text(user != null ? 'Sign out' : 'Sign in'),
+              onPressed: user != null ? _handleSignOut : _handleSignIn,
             ),
           ],
         ),
@@ -56,19 +76,41 @@ class _LoginPageState extends State<LoginPage> {
 
   Future _handleSignIn() async {
     try {
-      await _googleSignIn.signIn().then((data) {
-        if (data != null) {
+      await _googleSignIn.signIn().then((account) async {
+        if (account != null) {
+          Fluttertoast.showToast(
+              msg: 'Authentication Successfull',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIos: 1,
+              backgroundColor: Colors.grey,
+              textColor: Colors.white,
+              fontSize: 16.0);
+
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+
           setState(() {
-            account = data;
+            user = User(
+                id: account.id,
+                displayName: account.displayName,
+                email: account.email,
+                photoUrl: account.photoUrl,
+                token: '');
           });
-//          _scaffoldKey.currentState.showSnackBar(SnackBar(
-//            content: Text('Authentication Successfull'),
-//          ));
-          print(data.email + ' : ' + data.photoUrl);
+
+          //Json to String
+          print(json.encode(user.toJson()));
+          sharedPreferences.setString('user', json.encode(user.toJson()));
         } else {
-//          _scaffoldKey.currentState.showSnackBar(SnackBar(
-//            content: Text('Authentication Failed'),
-//          ));
+          Fluttertoast.showToast(
+              msg: 'Authentication Failed',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIos: 1,
+              backgroundColor: Colors.grey,
+              textColor: Colors.white,
+              fontSize: 16.0);
         }
       });
     } catch (error) {
@@ -78,13 +120,21 @@ class _LoginPageState extends State<LoginPage> {
 
   Future _handleSignOut() async {
     try {
-      await _googleSignIn.signOut().then((_) {
+      await _googleSignIn.signOut().then((_) async {
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.remove('user');
         setState(() {
-          account = null;
+          user = null;
         });
-//        _scaffoldKey.currentState.showSnackBar(SnackBar(
-//          content: Text('Signed out successfully'),
-//        ));
+        Fluttertoast.showToast(
+            msg: 'Signed Out Successfully',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            backgroundColor: Colors.grey,
+            textColor: Colors.white,
+            fontSize: 16.0);
       });
     } catch (error) {
       print(error);

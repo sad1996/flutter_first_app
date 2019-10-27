@@ -68,7 +68,7 @@ class FlutterModule extends StatelessWidget {
               );
             },
             title: Text('Example 4'),
-            subtitle: Text('Cupertino Dialog & Login'),
+            subtitle: Text('Login Dialog & Shared Preferences'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
