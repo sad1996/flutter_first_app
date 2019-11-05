@@ -4,6 +4,7 @@ import 'package:new_app/home_page.dart';
 import 'package:new_app/login_page.dart';
 import 'package:new_app/tabs_page.dart';
 
+import 'maps_page.dart';
 import 'trending_repos_page.dart';
 
 class FlutterModule extends StatelessWidget {
@@ -82,6 +83,19 @@ class FlutterModule extends StatelessWidget {
             },
             title: Text('Example 5'),
             subtitle: Text('HTTP'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+          Divider(height: 0.5),
+          ListTile(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MapsPage(),
+                ),
+              );
+            },
+            title: Text('Example 6'),
+            subtitle: Text('Google Maps'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
