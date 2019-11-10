@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/forms_page.dart';
-import 'package:new_app/home_page.dart';
-import 'package:new_app/tabs_page.dart';
-import 'flutter_modules.dart';
+import 'package:new_app/view/forms_page.dart';
+import 'package:new_app/view/home_page.dart';
+import 'package:new_app/view/tabs_page.dart';
+import 'view/flutter_modules.dart';
 
 void main() => runApp(MyApp());
 

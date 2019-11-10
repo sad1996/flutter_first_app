@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'repositories.dart';
+import '../model/repositories.dart';
 
 class TrendingReposPage extends StatelessWidget {
   @override

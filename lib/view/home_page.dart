@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:new_app/favourite_page.dart';
+import 'package:new_app/view/favourite_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

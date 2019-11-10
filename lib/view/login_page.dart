@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:new_app/user.dart';
+import 'package:new_app/model/user.dart';
+import 'package:new_app/view/hero_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -53,9 +54,22 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             if (user != null)
-              CircleAvatar(
-                backgroundImage: NetworkImage(user.photoUrl),
-                radius: 70,
+              GestureDetector(
+                child: Hero(
+                  tag: 'profile',
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(user.photoUrl),
+                    radius: 70,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HeroPage(
+                                user: user,
+                              )));
+                },
               )
             else
               Icon(

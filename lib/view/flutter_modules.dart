@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/forms_page.dart';
-import 'package:new_app/home_page.dart';
-import 'package:new_app/login_page.dart';
-import 'package:new_app/tabs_page.dart';
+import 'package:new_app/view/forms_page.dart';
+import 'package:new_app/view/home_page.dart';
+import 'package:new_app/view/login_page.dart';
+import 'package:new_app/view/tabs_page.dart';
 
 import 'maps_page.dart';
 import 'trending_repos_page.dart';
