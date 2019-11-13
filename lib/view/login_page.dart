@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,11 +9,15 @@ import 'package:new_app/model/user.dart';
 import 'package:new_app/view/hero_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'brands_page.dart';
+
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: [
     'email',
   ],
 );
+
+DatabaseReference reference = FirebaseDatabase.instance.reference();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -48,6 +53,14 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).pop(false);
           },
         ),
+        trailing: user != null
+            ? CupertinoButton(
+                child: Text('Enter'),
+                padding: EdgeInsets.zero,
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BrandsPage())),
+              )
+            : null,
       ),
       child: Center(
         child: Column(
@@ -113,9 +126,14 @@ class _LoginPageState extends State<LoginPage> {
                 token: '');
           });
 
+          await reference
+              .child('profiles')
+              .child(account.id)
+              .set(user.toJson());
+
           //Json to String
           print(json.encode(user.toJson()));
-          sharedPreferences.setString('user', json.encode(user.toJson()));
+          await sharedPreferences.setString('user', json.encode(user.toJson()));
         } else {
           Fluttertoast.showToast(
               msg: 'Authentication Failed',
