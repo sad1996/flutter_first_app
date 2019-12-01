@@ -59,6 +59,7 @@ class FlutterModule extends StatelessWidget {
           ),
           Divider(height: 0.5),
           ListTile(
+            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             onTap: () {
               Navigator.of(context, rootNavigator: true).push(
                 MaterialPageRoute(
@@ -68,7 +69,8 @@ class FlutterModule extends StatelessWidget {
               );
             },
             title: Text('Example 4'),
-            subtitle: Text('Login Dialog & Shared Preferences'),
+            subtitle:
+                Text('Google Sign in, Shared Preferences & Firebase Database'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
@@ -81,7 +83,7 @@ class FlutterModule extends StatelessWidget {
               );
             },
             title: Text('Example 5'),
-            subtitle: Text('HTTP & Connectivity'),
+            subtitle: Text('HTTP'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
