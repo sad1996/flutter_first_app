@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:new_app/provider/test_provider.dart';
+import 'package:provider/provider.dart';
 
-class TestPage extends StatefulWidget {
-  @override
-  _TestPageState createState() => _TestPageState();
-}
-
-class _TestPageState extends State<TestPage> {
-
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (isLoading)
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    else
-      return ListView();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    return Consumer<TestProvider>(
+      builder: (context, testProvider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Provider Example'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.arrow_forward),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TestPage()));
+                },
+              )
+            ],
+          ),
+          body: Center(
+            child: Text(
+              testProvider.cartCount.toString(),
+              style: Theme.of(context).textTheme.display3,
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: testProvider.incrementCartCount,
+          ),
+        );
+      },
+    );
   }
 }

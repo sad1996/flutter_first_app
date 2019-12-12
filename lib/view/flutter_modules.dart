@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_app/view/home_page.dart';
 import 'package:new_app/view/login_page.dart';
 import 'package:new_app/view/tabs_page.dart';
+import 'package:new_app/view/test_page.dart';
 
 import 'maps_page.dart';
 import 'trending_repos_page.dart';
@@ -83,7 +84,7 @@ class FlutterModule extends StatelessWidget {
               );
             },
             title: Text('Example 5'),
-            subtitle: Text('HTTP'),
+            subtitle: Text('HTTP & Provider'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),
@@ -97,6 +98,19 @@ class FlutterModule extends StatelessWidget {
             },
             title: Text('Example 6'),
             subtitle: Text('Google Maps'),
+            trailing: Icon(Icons.keyboard_arrow_right),
+          ),
+          Divider(height: 0.5),
+          ListTile(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => TestPage(),
+                ),
+              );
+            },
+            title: Text('Example 7'),
+            subtitle: Text('Provider'),
             trailing: Icon(Icons.keyboard_arrow_right),
           ),
           Divider(height: 0.5),

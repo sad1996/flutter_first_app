@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:new_app/provider/trending_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../model/repositories.dart';
 
 class TrendingReposPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +12,7 @@ class TrendingReposPage extends StatelessWidget {
         title: Text('Trending'),
       ),
       body: FutureBuilder<List<Repo>>(
-        future: getRepositories(),
+        future: Provider.of<TrendingProvider>(context).getRepositories(),
         builder: (context, snapshot) {
           if (snapshot.hasData)
             return ListView.separated(
@@ -47,16 +45,5 @@ class TrendingReposPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  Future<List<Repo>> getRepositories() async {
-    return await http
-        .get('https://github-trending-api.now.sh/repositories')
-        .then((response) {
-      print(response.body);
-      List<dynamic> data = json.decode(response.body);
-      List<Repo> repoList = data.map((item) => Repo.fromJson(item)).toList();
-      return repoList;
-    });
   }
 }
